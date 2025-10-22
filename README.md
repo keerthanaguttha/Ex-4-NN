@@ -1,6 +1,6 @@
 
-<H3>ENTER YOUR NAME</H3>
-<H3>ENTER YOUR REGISTER NO.</H3>
+<H3>ENTER YOUR NAME: Guttha Keerthana</H3>
+<H3>ENTER YOUR REGISTER NO.212223240045</H3>
 <H3>EX. NO.4</H3>
 <H3>DATE:</H3>
 <H1 ALIGN =CENTER>Implementation of MLP with Backpropagation for Multiclassification</H1>
@@ -116,11 +116,44 @@ Normalize our dataset.
 
 <H3>Program:</H3> 
 
-Insert your code here
+Insert your code here:
+```
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.neural_network import MLPClassifier
+from sklearn.metrics import classification_report, confusion_matrix
+
+url = "https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv"
+data = pd.read_csv(url)
+
+X = data.drop('species',axis=1)
+y = data['species']
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+scaler = StandardScaler()
+X_train = scaler.fit_transform(X_train)
+X_test = scaler.transform(X_test)
+
+mlp = MLPClassifier(hidden_layer_sizes=(10,8),activation='relu',solver='adam', 
+                    max_iter=1000,random_state=1)
+mlp.fit(X_train,y_train)
+
+y_pred = mlp.predict(X_test)
+
+print("Confusion Matrix:")
+print(confusion_matrix(y_test,y_pred))
+print("\nClassification Report:")
+print(classification_report(y_test,y_pred))
+```
+
+
 
 <H3>Output:</H3>
 
-Show your results here
+<img width="760" height="335" alt="image" src="https://github.com/user-attachments/assets/37117485-60e5-4de5-9f3b-b33dbb1c3b6c" />
+
 
 <H3>Result:</H3>
 Thus, MLP is implemented for multi-classification using python.
